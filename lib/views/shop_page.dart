@@ -1,5 +1,5 @@
 
-// views/shop_page.dart
+
 import 'package:flutter/material.dart';
 
 class ShopPage extends StatelessWidget {
@@ -9,4 +9,6 @@ class ShopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(child: Text('Shop Page', style: TextStyle(fontSize: 24)));
   }
+
+
 }

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'ExpertDetailPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,42 +10,72 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    title: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SvgPicture.asset(
+          'assets/svg_files/blue_sun.svg',
+          width: 28,
+          height: 28,
+        ),
+        Row(
           children: [
-            const Icon(Icons.wb_sunny_rounded, color: Colors.blue, size: 28),
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.search, color: Colors.black),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: const Icon(Icons.notifications_none, color: Colors.black),
-                  onPressed: () {},
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: const [
-                      Icon(Icons.lock, size: 16),
-                      SizedBox(width: 4),
-                      Text('100 ₹', style: TextStyle(fontSize: 14)),
-                    ],
-                  ),
-                ),
-              ],
+            IconButton(
+              icon: SvgPicture.asset(
+                'assets/svg_files/search.svg',
+                height: 24,
+                width: 24,
+                colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+              ),
+              onPressed: () {},
             ),
+            IconButton(
+              icon: SvgPicture.asset(
+                'assets/svg_files/bell.svg',
+                height: 24,
+                width: 24,
+                colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+              ),
+              onPressed: () {},
+            ),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+          SvgPicture.asset(
+          'assets/svg_files/wallet.svg', // Your wallet SVG file
+          width: 18,
+          height: 18,
+          color: Colors.black,
+        ),
+        const SizedBox(width: 4),
+        const Text(
+          '100 ₹',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 13,
+            height: 23 / 13, // Line-height calculation (23px / 13px font size)
+            letterSpacing: 0,
+          ),
+        ),
+        ],
+      ),
+
+
+    )
           ],
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      ],
+    ),
+    backgroundColor: Colors.transparent,
+    elevation: 0),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -57,14 +91,35 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+
 }
+
+
+
 
 class HorizontalMenu extends StatelessWidget {
   final List<MenuItem> menuItems = const [
-    MenuItem('Match Making', Icons.favorite, Colors.red),
-    MenuItem('Subh Muhurat', Icons.brightness_5, Colors.purple),
-    MenuItem('Horoscope', Icons.auto_awesome, Colors.orange),
-    MenuItem('Kundali', Icons.grid_3x3, Colors.teal),
+    MenuItem(
+      'Match Making',
+      'assets/svg_files/match_making.svg',
+      Colors.red,
+    ),
+    MenuItem(
+      'Subh Muhurat',
+      'assets/svg_files/subh_muhurat.svg',
+      Colors.purple,
+    ),
+    MenuItem(
+      'Horoscope',
+      'assets/svg_files/Subtract.svg',
+      Colors.orange,
+    ),
+    MenuItem(
+      'Kundali',
+      'assets/svg_files/kundali.svg',
+      Colors.teal,
+    ),
   ];
 
   @override
@@ -77,17 +132,39 @@ class HorizontalMenu extends StatelessWidget {
         itemCount: menuItems.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(right: 12),
+            padding: const EdgeInsets.only(right: 32),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  backgroundColor: menuItems[index].backgroundColor,
-                  radius: 28,
-                  child: Icon(menuItems[index].icon, color: Colors.white),
+                Container(
+                  width: 53.27,
+                  height: 54,
+                  decoration: BoxDecoration(
+                    color: menuItems[index].backgroundColor,
+                    borderRadius: BorderRadius.circular(9.53),
+                    border: Border.all(color: Colors.white, width: 0.79),
+                  ),
+                  child: Center(
+                    child:
+                    SvgPicture.asset(
+                      menuItems[index].svgPath,
+                      width: 28,
+                      height: 28,
+                      // Default SVG color as white
+                    )
+                  ),
                 ),
                 const SizedBox(height: 4),
-                Text(menuItems[index].title, style: const TextStyle(fontSize: 12)),
+                Text(
+                  menuItems[index].title,
+                  style: const TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 11,
+                    letterSpacing: 0,
+                    color: Color(0xFF393F44), // Default text color
+                  ),
+                ),
               ],
             ),
           );
@@ -99,11 +176,17 @@ class HorizontalMenu extends StatelessWidget {
 
 class MenuItem {
   final String title;
-  final IconData icon;
+  final String svgPath;
   final Color backgroundColor;
 
-  const MenuItem(this.title, this.icon, this.backgroundColor);
+  const MenuItem(
+      this.title,
+      this.svgPath,
+      this.backgroundColor,
+      );
 }
+
+
 
 class HorizontalCard extends StatelessWidget {
   @override
@@ -113,7 +196,15 @@ class HorizontalCard extends StatelessWidget {
       height: 120,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade400,
+        // Replace solid color with vertical gradient
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.grey.shade400, // light on top
+            Colors.grey.shade500, // dark on bottom
+          ],
+        ),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -123,46 +214,75 @@ class HorizontalCard extends StatelessWidget {
             "Explore your zodiac and\ncosmic insights live!",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
               color: Colors.white,
               shadows: [
                 Shadow(
-                  blurRadius: 2,
+                  blurRadius: 3,
                   color: Colors.black26,
-                  offset: Offset(1, 1),
+                  offset: Offset(0, 3),  // shadow only below the text
                 ),
               ],
             ),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: const [
-                  CircleAvatar(
-                    radius: 14,
-                    backgroundColor: Colors.white24,
+                children: [
+                  Container(
+                    width: 28,  // diameter = radius * 2
+                    height: 28,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.transparent,       // no fill color
+                      border: Border.all(
+                        color: Colors.white,         // stroke color
+                        width: 1,                     // stroke width
+                      ),
+                    ),
                   ),
-                  SizedBox(width: 8),
+
+                  const SizedBox(width: 8),
                   Text(
                     "Rakesh Kaushik",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                      height: 16 / 12, // line height 16px / 12px = 1.33
+                      letterSpacing: 0,
                       color: Colors.white,
                     ),
                   ),
                 ],
               ),
-              Row(
-                children: const [
-                  Icon(Icons.remove_red_eye, size: 18, color: Colors.white),
-                  SizedBox(width: 4),
-                  Text(
-                    "13k",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2), // lighter background, semi-transparent white
+                  borderRadius: BorderRadius.circular(6), // rounded corners
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min, // wrap content tightly
+                  children: [
+                    const Icon(Icons.remove_red_eye, size: 16, color: Colors.white),
+                    const SizedBox(width: 4),
+                    Text(
+                      "13k",
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w500,  // 500 weight
+                        fontSize: 12,
+                        height: 16 / 12,              // line height ratio = 1.33
+                        letterSpacing: 0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+
             ],
           )
         ],
@@ -170,40 +290,134 @@ class HorizontalCard extends StatelessWidget {
     );
   }
 }
+
+
 class ExpertCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Align(
-            alignment: Alignment.topRight,
-            child: Icon(Icons.circle, color: Colors.green, size: 12),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ExpertDetailPage(),
           ),
-          const SizedBox(height: 8),
-          const Text('Rakesh Kaushik', style: TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 4),
-          const Text('Rating : ⭐ 4.7'),
-          const Text('Exp : 10 years', style: TextStyle(fontWeight: FontWeight.bold)),
-          const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('10₹/min', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              Text('20₹/min', style: TextStyle(decoration: TextDecoration.lineThrough, fontSize: 12)),
-            ],
-          ),
-        ],
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.grey.shade300),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(8),
+                    image: const DecorationImage(
+                      image: NetworkImage("https://via.placeholder.com/64"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  top: 4,
+                  right: 4,
+                  child: Icon(Icons.circle, color: Colors.green, size: 12),
+                ),
+              ],
+            ),
+            const SizedBox(height: 9),
+            const Text('Rakesh Kaushik', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Rating : ',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Color(0xFFBFC3C7),
+                    ),
+                  ),
+                  const WidgetSpan(
+                    child: Text('⭐ '),
+                  ),
+                  TextSpan(
+                    text: '4.7',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                      color: Color(0xFF393F43),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Exp : ',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Color(0xFFBFC3C7),
+                    ),
+                  ),
+                  TextSpan(
+                    text: '10 Years',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                      color: Color(0xFF393F43),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '10₹/min',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Color(0xFF202124),
+                  ),
+                ),
+                Text(
+                  '20₹/min',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 9,
+                    height: 1.0,
+                    letterSpacing: 0,
+                    decoration: TextDecoration.lineThrough,
+                    color: Color(0xFF75757C),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+
 class ExpertsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -212,9 +426,19 @@ class ExpertsGrid extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Our Experts",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Our Experts",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SvgPicture.asset(
+                'assets/svg_files/filter.svg',
+                height: 24,
+                width: 24,
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           Expanded(

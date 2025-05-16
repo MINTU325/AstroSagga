@@ -8,6 +8,11 @@ pluginManagement {
     }()
 
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+    buildscript {
+        dependencies {
+            classpath 'com.android.tools.build:gradle:8.2.2' // Ensure this is at least 8.2.1
+        }
+    }
 
     repositories {
         google()

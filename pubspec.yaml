@@ -37,6 +37,11 @@ dependencies:
   flutter_bloc: ^8.1.2  # Use the latest version available
   equatable: ^2.0.5
   get: ^4.6.5
+  flutter_svg: ^2.0.4
+  google_fonts: ^6.1.0
+  path_provider: ^2.0.11
+  readmore: ^2.1.0
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -49,16 +54,56 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
 
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png" # Path to your logo file
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/svg_files/blue_sun.svg
+    - assets/svg_files/search.svg
+    - assets/svg_files/bell.svg
+    - assets/svg_files/wallet.svg
+    - assets/svg_files/match_making.svg
+    - assets/svg_files/kundali.svg
+    - assets/svg_files/horoscope.svg
+    - assets/svg_files/subh_muhurat.svg
+    - assets/images/horoscope.png
+    - assets/svg_files/Subtract.svg
+    - assets/svg_files/home.svg
+    - assets/svg_files/course.svg
+    - assets/svg_files/shop.svg
+    - assets/svg_files/profile.svg
+    - assets/svg_files/filter.svg
+    - assets/svg_files/back_arrow.svg
+    - assets/svg_files/share.svg
+    - assets/svg_files/more_vertical.svg
+    - assets/svg_files/call.svg
+    - assets/svg_files/chat.svg
+    - assets/svg_files/star.svg
+    - assets/svg_files/headset.svg
+    - assets/svg_files/bubble_chat.svg
+    - assets/svg_files/call_white.svg
+    - assets/svg_files/video_call.svg
+    - assets/images/logo.png
+
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+
+
+
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,9 +1,8 @@
-// views/buttom_nav_page.dart
 import 'package:astro_sagga/views/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../controllers/navigation_controller.dart';
-import 'horizontal_menu.dart';
 import 'courses_page.dart';
 import 'shop_page.dart';
 import 'profile_page.dart';
@@ -23,10 +22,8 @@ class ButtomNavPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Column(
         children: [
-
           Expanded(
             child: Obx(() => _screens[navController.selectedIndex.value]),
           ),
@@ -36,7 +33,7 @@ class ButtomNavPage extends StatelessWidget {
             () => BottomNavigationBar(
           currentIndex: navController.selectedIndex.value,
           onTap: navController.changeTab,
-          selectedFontSize: 14,
+          selectedFontSize: 13,
           unselectedFontSize: 12,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.black,
@@ -44,14 +41,29 @@ class ButtomNavPage extends StatelessWidget {
           backgroundColor: Colors.white,
           showUnselectedLabels: true,
           showSelectedLabels: true,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Courses'),
-            BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Shop'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          items: [
+            _buildNavItem('home.svg', 'Home', 0),
+            _buildNavItem('course.svg', 'Courses', 1),
+            _buildNavItem('shop.svg', 'Shop', 2),
+            _buildNavItem('profile.svg', 'Profile', 3),
           ],
         ),
       ),
+    );
+  }
+
+  BottomNavigationBarItem _buildNavItem(String asset, String label, int index) {
+    return BottomNavigationBarItem(
+      icon: SvgPicture.asset(
+        'assets/svg_files/$asset',
+        height: 24,
+        width: 24,
+        colorFilter: ColorFilter.mode(
+          navController.selectedIndex.value == index ? Colors.black : Colors.grey,
+          BlendMode.srcIn,
+        ),
+      ),
+      label: label,
     );
   }
 }
