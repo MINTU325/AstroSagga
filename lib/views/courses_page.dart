@@ -1,4 +1,3 @@
-// views/courses_page.dart
 import 'package:flutter/material.dart';
 
 class CoursesPage extends StatelessWidget {

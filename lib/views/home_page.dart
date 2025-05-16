@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'ExpertDetailPage.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,70 +12,22 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-    title: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SvgPicture.asset(
-          'assets/svg_files/blue_sun.svg',
-          width: 28,
-          height: 28,
-        ),
-        Row(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/svg_files/search.svg',
-                height: 24,
-                width: 24,
-                colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-              ),
-              onPressed: () {},
+            SvgPicture.asset('assets/svg_files/blue_sun.svg', width: 28, height: 28),
+            Row(
+              children: [
+                _buildIcon('search.svg'),
+                _buildIcon('bell.svg'),
+                _buildWalletWidget(),
+              ],
             ),
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/svg_files/bell.svg',
-                height: 24,
-                width: 24,
-                colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-              ),
-              onPressed: () {},
-            ),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-          SvgPicture.asset(
-          'assets/svg_files/wallet.svg', // Your wallet SVG file
-          width: 18,
-          height: 18,
-          color: Colors.black,
-        ),
-        const SizedBox(width: 4),
-        const Text(
-          '100 ₹',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 13,
-            height: 23 / 13, // Line-height calculation (23px / 13px font size)
-            letterSpacing: 0,
-          ),
-        ),
-        ],
-      ),
-
-
-    )
           ],
         ),
-      ],
-    ),
-    backgroundColor: Colors.transparent,
-    elevation: 0),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -85,16 +37,49 @@ class HomePage extends StatelessWidget {
             HorizontalCard(),
             const SizedBox(height: 16),
             ExpertsGrid(),
-
           ],
         ),
       ),
     );
   }
 
+  Widget _buildIcon(String asset) {
+    return IconButton(
+      icon: SvgPicture.asset(
+        'assets/svg_files/$asset',
+        height: 24,
+        width: 24,
+        colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+      ),
+      onPressed: () {},
+    );
+  }
 
+  Widget _buildWalletWidget() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.asset('assets/svg_files/wallet.svg', width: 18, height: 18, color: Colors.black),
+          const SizedBox(width: 4),
+          const Text(
+            '100 ₹',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              height: 23 / 13,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
-
 
 
 
